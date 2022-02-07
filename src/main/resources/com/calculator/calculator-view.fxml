@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.calculator.CalculatorController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
-    <Label fx:id="textDisplayBox"/>
-    <Button text="Hello!" onAction="#onTestButtonClick"/>
-</VBox>
+<?import javafx.scene.layout.GridPane?>
+
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.calculator.CalculatorController">
+
+    <Label fx:id="textDisplayBox" GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="4"/>
+
+    <Button text="C" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+    <Button text="&#x00B1;" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Button text="\%" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+    <Button text="&#x00F7;" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+    <Button text="7" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+    <Button text="8" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Button text="9" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+    <Button text="&#x2A2F;" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+    <Button text="4" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+
+    <Button text="5" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Button text="6" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+    <Button text="-" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+    <Button text="1" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+
+    <Button text="2" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <Button text="3" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+
+    <Button text="+" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+
+    <Button text="0" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="5"
+            GridPane.columnSpan="2"/>
+
+    <Button text="." onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+
+    <Button text="=" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+
+</GridPane>
