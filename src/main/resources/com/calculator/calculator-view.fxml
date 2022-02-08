@@ -8,46 +8,50 @@
 
 <GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.calculator.CalculatorController">
 
-    <Label fx:id="textDisplayBox" GridPane.columnIndex="0" GridPane.rowIndex="0"
+    <Label fx:id="equationDisplay" GridPane.columnIndex="0" GridPane.rowIndex="0"
            GridPane.columnSpan="4"/>
 
-    <Button text="C" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Label fx:id="resultDisplay" GridPane.columnIndex="0" GridPane.rowIndex="1"
+           GridPane.columnSpan="4"/>
 
-    <Button text="&#x00B1;" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Button text="C" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-    <Button text="\%" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    <Button text="( )" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-    <Button text="&#x00F7;" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+    <Button text="\%" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
 
-    <Button text="7" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <Button text="&#x00F7;" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
 
-    <Button text="8" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Button text="7" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-    <Button text="9" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <Button text="8" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-    <Button text="&#x2A2F;" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+    <Button text="9" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
 
-    <Button text="4" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <Button text="&#x2A2F;" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
 
-    <Button text="5" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Button text="4" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
 
-    <Button text="6" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    <Button text="5" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-    <Button text="-" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+    <Button text="6" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
 
-    <Button text="1" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <Button text="-" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
 
-    <Button text="2" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <Button text="1" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
-    <Button text="3" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+    <Button text="2" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
-    <Button text="+" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+    <Button text="3" onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
 
-    <Button text="0" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="5"
-            GridPane.columnSpan="2"/>
+    <Button text="+" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
 
-    <Button text="." onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+    <Button text="&#x00B1;" onAction="#buttonPressed" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 
-    <Button text="=" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+    <Button text="0" onAction="#buttonPressed" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <Button text="." onAction="#buttonPressed" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+
+    <Button text="=" onAction="#buttonPressed" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
 
 </GridPane>

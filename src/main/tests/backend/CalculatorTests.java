@@ -12,7 +12,7 @@ public class CalculatorTests {
     @Test
     public void testPositiveNumbers() {
         String[] expressions = {"2", "(450)", "13.9", "0.112", ""};
-        float[] results = {2, 450, (float) 13.9, (float) 0.112, 0};
+        float[] results = {2, 450, 13.9f, 0.112f, 0};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Number Conversion");
@@ -24,7 +24,7 @@ public class CalculatorTests {
     @Test
     public void testNegativeNumbers() {
         String[] expressions = {"-15", "(-192)", "-(0.862)", "- 9912"};
-        float[] results = {-15, -192, (float) -0.862, -9912};
+        float[] results = {-15, -192, -0.862f, -9912};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Number Conversion");
@@ -61,7 +61,7 @@ public class CalculatorTests {
     @Test
     public void testNormalAddition() {
         String[] expressions = {"2+2", "6.4 + 11", "(-11) + 13", "23 + 1 + 9.2 + 312", "11 + 2 + (-25)", "(-10) + (-321)"};
-        float[] results = {4, (float) 17.4, 2, (float) 345.2, -12, -331};
+        float[] results = {4, 17.4f, 2, 345.2f, -12, -331};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Addition Result");
@@ -73,7 +73,7 @@ public class CalculatorTests {
     @Test
     public void testNormalSubtraction() {
         String[] expressions = {"2-2", "6.4 - 11", "(-11) - 13", "23 - 1 + 9.2 - 312", "11 - 2 + (-25)", "(-10) - (-321)"};
-        float[] results = {0, (float) -4.6, -24, (float) -280.8, -16, 311};
+        float[] results = {0, -4.6f, -24, -280.8f, -16, 311};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Subtraction Result");
@@ -97,7 +97,7 @@ public class CalculatorTests {
     @Test
     public void testNormalDivision() {
         String[] expressions = {"2/2", "4/500", "0 / 124112", "(-1912) / 9120", "(-123) / (-991)", "1238 / (-13)"};
-        float[] results = {1, (float) 0.008, 0, (float) (-1912) / 9120, (float) (-123) / (-991), (float) 1238 / (-13)};
+        float[] results = {1, 0.008f, 0, (float) (-1912) / 9120, (float) (-123) / (-991), (float) 1238 / (-13)};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Division Result");
@@ -129,7 +129,7 @@ public class CalculatorTests {
     public void testNormalPrecedence() {
         String[] expressions = {"2 + 2 * 2", "901 * 52 + 11 / 4", "(-321) + 221 / (-31) * (-813)",
                 "0 / 13 + 12 * 3", "10 + 2 * 6", "100 * 2 + 12"};
-        float[] results = {6, (float) 46854.75, (float) 221 / 25203 - 321, 36, 22, 212};
+        float[] results = {6, 46854.75f, (float) 221 / 31 * 813 - 321, 36, 22, 212};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Precedence in calculation");

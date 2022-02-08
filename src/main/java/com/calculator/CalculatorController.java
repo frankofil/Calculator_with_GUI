@@ -15,17 +15,23 @@ import javafx.scene.control.Label;
  */
 public class CalculatorController {
 
+    /**
+     * Turns on DEBUG Mode to see all incoming signals, evaluations, and translations of arithmetic expressions
+     */
+    public final boolean DEBUG_MODE = true;
+
     @FXML
-    private Label textDisplayBox;
+    private Label resultDisplay;
     @FXML
     private Label equationDisplay;
+
     private final Calculator calculator;
 
     /**
      * Constructor for initializing the Calculator Controller
      */
     public CalculatorController() {
-        this.calculator = new Calculator();
+        calculator = new Calculator();
     }
 
     /**
@@ -33,8 +39,11 @@ public class CalculatorController {
      */
     @FXML
     protected void buttonPressed(ActionEvent event) {
-        System.out.println("Button " + ((Button) event.getSource()).getText() + " pressed");
-        this.calculator.recordSignal(((Button) event.getSource()).getText().charAt(0));
-        textDisplayBox.setText(this.calculator.getDisplay());
+        if (DEBUG_MODE)
+            System.out.println("Button " + ((Button) event.getSource()).getText() + " pressed");
+        // Record new signal and update the displays
+        calculator.recordSignal(((Button) event.getSource()).getText().charAt(0));
+        resultDisplay.setText(calculator.getDisplay());
+        equationDisplay.setText(calculator.getEquation());
     }
 }
