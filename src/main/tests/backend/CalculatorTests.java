@@ -142,7 +142,7 @@ public class CalculatorTests {
     public void testPrecedenceWithBrackets() {
         String[] expressions = {"100 * ( 2 + 12 )", "100 * ( 2 + 12 ) / 14", "0 * (123 - 123 * 12) + 12 / 6",
                 "891 / ((123  * 34) + 92) + 813 * 5", "(((-312) * (823)) / 2431) + 2"};
-        float[] results = {1400, 100, 2, (float) 891 / ((123 * 34) + 92) + 813 * 5, (float) (((-312) * (823)) / 2431) + 2};
+        float[] results = {1400, 100, 2, (float) 891 / ((123 * 34) + 92) + 813 * 5, (((-312f) * (823f)) / 2431f) + 2};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Precedence in calculation");

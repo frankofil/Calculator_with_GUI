@@ -1,7 +1,5 @@
 package com.calculator.tools;
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -79,18 +77,17 @@ public class Calculator {
      * @author Improved algorithm from geeksforgeeks.org
      */
     public static Float evaluateEquation(String equation) throws IllegalArgumentException {
-        equation = equation.replaceAll(" ", "");
-        char[] tokens = equation.toCharArray();
+        char[] tokens = equation.replaceAll(" ", "").toCharArray();
         // Stack for numbers
         Stack<Float> values = new Stack<>();
         // Stack for operators
         Stack<Character> operators = new Stack<>();
+        // Previous value for dealing with negative numbers
+        char previous = 0;
+        boolean negate = false;
 
         for (int i = 0; i < tokens.length; i++) {
             char curr = tokens[i];
-
-            // Skip if current character is a whitespace
-            if (curr == ' ') continue;
 
             // Deal with numbers
             if (curr >= '0' && curr <= '9') {
@@ -98,41 +95,45 @@ public class Calculator {
                 // Parse full number
                 while (i < tokens.length && ((tokens[i] >= '0' && tokens[i] <= '9') || tokens[i] == '.'))
                     buffer.append(tokens[i++]);
-                values.push(Float.parseFloat(buffer.toString()));
+                // Negate the value if necessary
+                if (negate)
+                    values.push((-1) * Float.parseFloat(buffer.toString()));
+                else
+                    values.push(Float.parseFloat(buffer.toString()));
+                negate = false;
+                curr = buffer.charAt(buffer.length() - 1);
                 i--;
-            } else if (curr == '(')
+            } else if (curr == '(') {
                 operators.push(curr);
-            else if (curr == ')') {
+            } else if (curr == ')') {
                 // Solve entire brace
-                while (!operators.empty() && operators.peek() != '(') {
-                    Pair<Stack<Float>, Stack<Character>> stacks = applyOperation(operators.pop(), values, operators);
-                    values = stacks.getKey();
-                    operators = stacks.getValue();
-                }
+                while (!operators.empty() && hasPrecedence(curr, operators.peek()))
+                    applyOperation(operators.pop(), values);
                 if (operators.empty())
                     throw new IllegalArgumentException("Invalid expression");
                 else
                     operators.pop(); // Take out the opening bracket
             } else if (curr == '+' || curr == '-' || curr == '*' || curr == '/') {
+                // Check if the sign is at the end of the expression
                 if (i >= tokens.length - 1)
                     throw new IllegalArgumentException("Incorrect syntax: " + curr);
-                // Evaluate previous operators with higher or same precedence
-                while (!operators.empty() && hasPrecedence(curr, operators.peek())) {
-                    Pair<Stack<Float>, Stack<Character>> stacks = applyOperation(operators.pop(), values, operators);
-                    values = stacks.getKey();
-                    operators = stacks.getValue();
+                // Check if this '-' represents negative number
+                if (curr == '-' && (previous == '\0' || previous == '(')) {
+                    negate = !negate;
+                } else {
+                    // Evaluate previous operators with higher or same precedence
+                    while (!operators.empty() && hasPrecedence(curr, operators.peek()))
+                        applyOperation(operators.pop(), values);
+                    operators.push(curr);
                 }
-                operators.push(curr);
             } else
                 throw new IllegalArgumentException("Unknown symbol: " + curr);
+            previous = curr;
         }
 
         // Apply remaining operators to remaining operators
-        while (!operators.empty()) {
-            Pair<Stack<Float>, Stack<Character>> stacks = applyOperation(operators.pop(), values, operators);
-            values = stacks.getKey();
-            operators = stacks.getValue();
-        }
+        while (!operators.empty())
+            applyOperation(operators.pop(), values);
 
         return values.empty() || values.peek() == -0f ? 0 : values.pop();
     }
@@ -141,8 +142,6 @@ public class Calculator {
      * Compares two operators based on their precedence. True if operator2 has higher or same precedence as operator1, otherwise returns false
      */
     private static boolean hasPrecedence(char operator1, char operator2) {
-        if (operator1 == '-' && operator2 == '(')
-            return false;
         if (operator2 == '(' || operator2 == ')')
             return false;
         return !((operator1 == '*' || operator1 == '/') && (operator2 == '+' || operator2 == '-'));
@@ -151,43 +150,27 @@ public class Calculator {
     /*
      * Applies mathematical operator to a and b
      */
-    private static Pair<Stack<Float>, Stack<Character>> applyOperation(char operator, Stack<Float> values, Stack<Character> operators)
+    private static void applyOperation(char operator, Stack<Float> values)
             throws UnsupportedOperationException, IllegalArgumentException {
-        if (values.empty())
+        if (values.size() < 2)
             throw new IllegalArgumentException("Invalid syntax");
-        else if (values.size() == 1) {
-            if (operator == '-')
-                values.push((-1) * values.pop());
-            else
-                throw new IllegalArgumentException("Invalid syntax");
-        } else {
+        else {
             switch (operator) {
-                case '+':
-                    values.push(values.pop() + values.pop());
-                    break;
-                case '*':
-                    values.push(values.pop() * values.pop());
-                    break;
-                case '/':
+                case '+' -> values.push(values.pop() + values.pop());
+                case '-' -> {
+                    float b = values.pop();
+                    values.push(values.pop() - b);
+                }
+                case '*' -> values.push(values.pop() * values.pop());
+                case '/' -> {
                     float b = values.pop(), a = values.pop();
                     if (b == 0)
                         throw new UnsupportedOperationException("Cannot divide by zero");
                     else
                         values.push(a / b);
-                    break;
-                case '-':
-                    if (!operators.empty() && operators.peek() == '(')
-                        values.push((-1) * values.pop());
-                    else {
-                        float second = values.pop();
-                        values.push(values.pop() - second);
-                    }
-
-                    break;
-                default:
-                    throw new UnsupportedOperationException("Unknown operation: " + operator);
+                }
+                default -> throw new UnsupportedOperationException("Unknown operation: " + operator);
             }
         }
-        return new Pair<>(values, operators);
     }
 }
