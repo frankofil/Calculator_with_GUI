@@ -1,18 +1,24 @@
-package backend;
+package calculator;
 
 import com.calculator.tools.Calculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CalculatorTests {
+/**
+ * Tests that check the behaviour of calculator when evaluating mathematical expressions
+ *
+ * @author Franciszek Myslek
+ * @version 1.1
+ */
+public class CalculatorExpressionEvaluationTests {
 
     /**
      * Tests the behaviour of positive numbers
      */
     @Test
     public void testPositiveNumbers() {
-        String[] expressions = {"2", "(450)", "13.9", "0.112", ""};
-        float[] results = {2, 450, 13.9f, 0.112f, 0};
+        String[] expressions = {"2", "(450)", "13.9", "0.112", "", "78."};
+        float[] results = {2, 450, 13.9f, 0.112f, 0, 78};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Number Conversion");
@@ -23,8 +29,8 @@ public class CalculatorTests {
      */
     @Test
     public void testNegativeNumbers() {
-        String[] expressions = {"-15", "(-192)", "-(0.862)", "- 9912"};
-        float[] results = {-15, -192, -0.862f, -9912};
+        String[] expressions = {"-15", "(-192)", "-(0.862)", "- 9912", "(-0)"};
+        float[] results = {-15, -192, -0.862f, -9912, 0};
         for (int i = 0; i < expressions.length; i++)
             Assertions.assertEquals(results[i],
                     Calculator.evaluateEquation(expressions[i]), "Invalid Number Conversion");
